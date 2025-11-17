@@ -19,3 +19,8 @@ validator my_first_mint {
 test test_my_first_mint() {
   my_first_mint.mint(Void, #"", placeholder)
 }
+
+test test_minting_with_trace() {
+  trace @"Testing minting validator with trace"
+  my_first_mint.mint(Void, #"", placeholder)
+}
