@@ -1,0 +1,21 @@
+
+use cardano/assets.{PolicyId}
+use cardano/transaction.{Transaction, placeholder}
+
+validator my_first_mint {
+  mint(
+    _redeemer: Data,
+    _policy_id: PolicyId,
+    _tx: Transaction,
+  ) {
+    True
+  }
+
+  else(_) {
+    fail
+  }
+}
+
+test test_my_first_mint() {
+  my_first_mint.mint(Void, #"", placeholder)
+}
