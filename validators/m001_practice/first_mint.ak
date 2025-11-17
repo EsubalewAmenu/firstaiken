@@ -1,6 +1,7 @@
 
 use cardano/assets.{PolicyId}
 use cardano/transaction.{Transaction, placeholder}
+use cardano/script_context.{ScriptContext, Minting}
 
 validator my_first_mint {
   mint(
@@ -23,4 +24,14 @@ test test_my_first_mint() {
 test test_minting_with_trace() {
   trace @"Testing minting validator with trace"
   my_first_mint.mint(Void, #"", placeholder)
+}
+
+test test_minting_wrong_purpose() fail {
+  let context =
+    ScriptContext {
+      transaction: placeholder,
+      redeemer: Void,
+      info: Minting(#""),
+    }
+  !my_first_mint.else(context)
 }
