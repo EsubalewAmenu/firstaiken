@@ -8,6 +8,7 @@ validator my_first_spend {
     _input: OutputReference,
     _tx: Transaction,
   ) {
+    trace @"Spending validator called"
     True
   }
 
@@ -17,5 +18,10 @@ validator my_first_spend {
 }
 
 test test_my_first_spend() {
+  my_first_spend.spend(None, Void, mock_utxo_ref(0, 0), placeholder)
+}
+
+test test_with_trace() {
+  trace @"Testing spending validator"
   my_first_spend.spend(None, Void, mock_utxo_ref(0, 0), placeholder)
 }
